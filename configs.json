@@ -17,12 +17,12 @@
     "create" : {
         "filter_column_value": {"project" : "qemu"},
         "slice_size": 500,
-        "joern_cli_dir": "joern/joern-cli/"
+        "joern_cli_dir": "joern/joern-cli/bin/"
     },
     "paths" : {
         "cpg" : "data/cpg/",
         "joern" : "data/joern/",
-        "raw" : "data/raw/",
+        "raw" : "data/raw/", 
         "input" : "data/input/",
         "model" : "data/model/",
         "tokens" : "data/tokens/"

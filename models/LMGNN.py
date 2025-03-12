@@ -1,7 +1,7 @@
-import torch as th
+import torch 
 import torch.nn as nn
 import torch.nn.functional as F
-from layers import Conv, encode_input
+from models.layers import Conv, encode_input
 from torch_geometric.nn.conv import GatedGraphConv
 from transformers import AutoModel, AutoTokenizer
 from transformers import RobertaTokenizer, RobertaConfig, RobertaModel
@@ -18,7 +18,7 @@ class BertGGCN(nn.Module):
         self.tokenizer = RobertaTokenizer.from_pretrained("microsoft/codebert-base")
         self.bert_model = RobertaModel.from_pretrained("microsoft/codebert-base").to(device)
         self.feat_dim = list(self.bert_model.modules())[-2].out_features
-        self.classifier = th.nn.Linear(self.feat_dim, self.nb_class).to(device)
+        self.classifier = torch.nn.Linear(self.feat_dim, self.nb_class).to(device)
         self.device = device
         # self.conv.apply(init_weights)
 
@@ -38,7 +38,7 @@ class BertGGCN(nn.Module):
         cls_logit = self.classifier(cls_feats.to(self.device))
 
         pred = (x + 1e-10) * self.k + cls_logit * (1 - self.k)
-        pred = th.log(pred)
+        pred = torch.log(pred)
 
         return pred
 
